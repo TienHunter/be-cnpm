@@ -4,7 +4,9 @@
     "password": "tien.hust",
     "database": "cnpm",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging":false,
+    "raw":true
   },
   "test": {
     "username": "root",

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
          householdCode: DataTypes.STRING,
          owner: DataTypes.STRING,
          addressHouse: DataTypes.STRING,
-         neighborhood: DataTypes.STRING,
+         precinct: DataTypes.STRING,
          district: DataTypes.STRING,
          city: DataTypes.STRING,
       },
