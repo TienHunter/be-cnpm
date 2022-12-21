@@ -1,6 +1,5 @@
 "use strict";
 const { hashString } = require("../src/middlewares/bcrypt.cjs");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
    up: async (queryInterface) =>

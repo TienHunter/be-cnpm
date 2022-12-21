@@ -66,11 +66,12 @@ let getHouseholdByFilterAndPaging = async (limit, offset, keyword) => {
 let deleteHouseholdByID = async (householdID) => {
    try {
       let household = await getHouseholdByID(householdID);
-      let rowAffect = await db.Household.destroy({
-         where: { id: householdID },
-      });
-      if (rowAffect > 0) {
-         await deletePeopleByHouseholdCode(household.householdCode);
+
+      if (household) {
+         await deleteResidentByHouseholdCode(household.householdCode);
+         await db.Household.destroy({
+            where: { id: householdID },
+         });
       }
    } catch (error) {
       throw error;

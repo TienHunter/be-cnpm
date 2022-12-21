@@ -22,6 +22,16 @@ let getResidentByHouseholdCode = async (householdCode) => {
       throw error;
    }
 };
+let getResidentByID = async (residenID) => {
+   try {
+      return await db.Resident.findOne({
+         where: { id: residenID },
+         raw: true,
+      });
+   } catch (error) {
+      throw error;
+   }
+};
 let getResidentByFilterAndPaging = async (limit, offset, keyword) => {
    try {
       let { count, rows } = await db.Resident.findAndCountAll({
@@ -68,6 +78,23 @@ let deleteResidentByID = async (ResidentID) => {
       throw error;
    }
 };
+let updateResidentByID = async (updateBody) => {
+   try {
+      let id = updateBody.id;
+      delete updateBody.id;
+      return await db.Resident.update(
+         {
+            ...updateBody,
+         },
+         {
+            where: { id },
+         }
+      );
+   } catch (error) {
+      console.log("error");
+      throw error;
+   }
+};
 export {
    getAllResident,
    getResidentByHouseholdCode,
@@ -75,4 +102,6 @@ export {
    deleteResidentByHouseholdCode,
    createResident,
    deleteResidentByID,
+   getResidentByID,
+   updateResidentByID,
 };
