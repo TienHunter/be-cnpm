@@ -80,9 +80,67 @@ let deleteHouseholdByID = async (householdID) => {
 let getHouseholdByHouseholdCode = async (householdCode) => {
    try {
       return await db.Household.findOne({
-         where: { householdCode },
+         where: { householdCode: householdCode },
          raw: true,
       });
+   } catch (error) {
+      throw error;
+   }
+};
+const getHouseholdsByFilter = async (
+   pageSize = 20,
+   pageNumber = 1,
+   keyword = ""
+) => {
+   try {
+      let totalRecords = 0;
+      let includeObj = {
+         limit: pageSize - 0,
+         offset: (pageNumber - 1) * pageSize,
+         raw: true,
+      };
+      if (keyword && keyword.trim() !== "") {
+         includeObj.where = {
+            [Op.or]: [
+               {
+                  householdCode: {
+                     [Op.like]: `%${keyword}%`,
+                  },
+               },
+               {
+                  owner: {
+                     [Op.like]: `%${keyword}%`,
+                  },
+               },
+               {
+                  addressHouse: {
+                     [Op.like]: `%${keyword}%`,
+                  },
+               },
+               {
+                  precinct: {
+                     [Op.like]: `%${keyword}%`,
+                  },
+               },
+            ],
+         };
+         totalRecords = await db.Household.count({
+            where: {
+               ...includeObj.where,
+            },
+         });
+      } else {
+         totalRecords = await db.Household.count();
+      }
+      let households = await db.Household.findAll({ ...includeObj });
+
+      return {
+         households,
+         totalRecords,
+         // pageSize,
+         // pageNumber,
+         // keyword,
+      };
    } catch (error) {
       throw error;
    }
@@ -95,4 +153,5 @@ export {
    createHousehold,
    deleteHouseholdByID,
    getHouseholdByHouseholdCode,
+   getHouseholdsByFilter,
 };

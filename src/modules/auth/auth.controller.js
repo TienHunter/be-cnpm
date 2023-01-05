@@ -8,16 +8,16 @@ import * as authService from "./auth.service.js";
 
 const login = async (req, res) => {
    try {
-      const { email, password } = req.body;
-      const user = await authService.getAccountByUsername(email);
+      const { username, password } = req.body;
+      const user = await authService.getAccountByUsername(username);
 
       if (!user || !checkHashedString(password, user.password)) {
          return res
-            .status(HttpStatus.BAD_REQUEST)
+            .status(HttpStatus.INVALID_USERNAME_OR_PASSWORD)
             .json(
                new ErrorResponse(
                   HttpStatus.INVALID_USERNAME_OR_PASSWORD,
-                  "Invalid email or password"
+                  "Invalid username or password"
                )
             );
       }

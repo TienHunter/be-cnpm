@@ -28,4 +28,16 @@ const createHousehold = {
       city: Joi.string().lowercase().required().trim(),
    }),
 };
-export { getHouseholdByID, updateHouseholdByID, createHousehold };
+const getHouseholdsByFilter = {
+   query: Joi.object().keys({
+      pageSize: Joi.number().integer().min(1).optional(),
+      pageNumber: Joi.number().integer().min(1).optional(),
+      keyword: Joi.string().optional().allow(""),
+   }),
+};
+export {
+   getHouseholdByID,
+   updateHouseholdByID,
+   createHousehold,
+   getHouseholdsByFilter,
+};

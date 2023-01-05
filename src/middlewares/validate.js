@@ -22,6 +22,14 @@ const validate = (schema) => (req, res, next) => {
          if (result.error) {
             return res
                .status(HttpStatus.BAD_REQUEST)
+               .send(new ErrorResponse(HttpStatus.BAD_REQUEST, result.error));
+         }
+      }
+      if (schema.query) {
+         result = schema.query.validate(req.query);
+         if (result.error) {
+            return res
+               .status(HttpStatus.BAD_REQUEST)
                .send(
                   new ErrorResponse(
                      HttpStatus.BAD_REQUEST,

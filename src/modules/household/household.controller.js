@@ -49,7 +49,6 @@ const updateHouseholdByID = async (req, res) => {
          );
    }
 };
-const getHouseholdByFilterAndPaging = async (req, res) => {};
 const createHousehold = async (req, res) => {
    try {
       let checkExist = await householdService.getHouseholdByHouseholdCode(
@@ -93,10 +92,28 @@ const deleteHouseholdByID = async (req, res) => {
          );
    }
 };
+const getHouseholdsByFilter = async (req, res) => {
+   try {
+      let { pageSize, pageNumber, keyword } = req.query;
+      let households = await householdService.getHouseholdsByFilter(
+         pageSize,
+         pageNumber,
+         keyword
+      );
+      return res.status(HttpStatus.OK).json(new SuccessResponse(households));
+   } catch (error) {
+      return res
+         .status(HttpStatus.INTERNAL_SERVER_ERROR)
+         .json(
+            new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, error.message)
+         );
+   }
+};
 export {
    getAllHouseholds,
    getHouseholdByID,
    updateHouseholdByID,
    createHousehold,
    deleteHouseholdByID,
+   getHouseholdsByFilter,
 };

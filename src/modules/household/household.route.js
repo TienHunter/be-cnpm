@@ -12,6 +12,12 @@ router.post(
    householdController.updateHouseholdByID
 );
 router.get(
+   "/filter",
+   [verifyToken],
+   validate(householdValidator.getHouseholdsByFilter),
+   householdController.getHouseholdsByFilter
+);
+router.get(
    "/:householdID",
    verifyToken,
    validate(householdValidator.getHouseholdByID),
@@ -29,5 +35,6 @@ router.delete(
    validate(householdValidator.getHouseholdByID),
    householdController.deleteHouseholdByID
 );
+
 router.get("/", [verifyToken], householdController.getAllHouseholds);
 export default router;
