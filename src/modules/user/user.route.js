@@ -9,7 +9,7 @@ const router = Router();
 router.get(
    "/",
    [verifyToken, checkUserRole(UserRole.ADMIN)],
-   userController.getAllAccount
+   userController.getUserList
 );
 
 export default router;

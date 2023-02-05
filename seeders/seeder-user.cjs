@@ -4,33 +4,37 @@ const { hashString } = require("../src/middlewares/bcrypt.cjs");
 module.exports = {
    up: async (queryInterface) =>
       queryInterface.bulkInsert(
-         "Accounts",
+         "User",
          [
             {
-               usename: "admin1",
+               username: "admin1",
                password: hashString("123456"),
-               role: "R1",
+               idNhanKhau: 1,
+               role: 1,
                createdAt: new Date(),
                updatedAt: new Date(),
             },
             {
-               usename: "leader1",
+               username: "admin2",
                password: hashString("123456"),
-               role: "R2",
+               idNhanKhau: 2,
+               role: 2,
                createdAt: new Date(),
                updatedAt: new Date(),
             },
             {
-               usename: "leader2",
-               password: hashString("123123"),
-               role: "R3",
+               username: "admin3",
+               password: hashString("123456"),
+               idNhanKhau: 3,
+               role: 3,
                createdAt: new Date(),
                updatedAt: new Date(),
             },
             {
-               usename: "member1",
+               username: "admin4",
                password: hashString("123456"),
-               role: "R4",
+               idNhanKhau: 4,
+               role: 4,
                createdAt: new Date(),
                updatedAt: new Date(),
             },

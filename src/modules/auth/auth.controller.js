@@ -4,12 +4,12 @@ import { HttpStatus, UserRole } from "../../constant.js";
 import { checkHashedString } from "../../middlewares/bcrypt.cjs";
 import ErrorResponse from "../../utils/ErrorResponse.js";
 import SuccessResponse from "../../utils/SuccessResponse.js";
-import * as authService from "./auth.service.js";
+import * as userService from "../user/services/user.service.js";
 
 const login = async (req, res) => {
    try {
       const { username, password } = req.body;
-      const user = await authService.getAccountByUsername(username);
+      const user = await userService.getUserByUsername(username);
 
       if (!user || !checkHashedString(password, user.password)) {
          return res

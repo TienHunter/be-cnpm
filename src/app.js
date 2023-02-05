@@ -7,8 +7,8 @@ dotenv.config();
 const port = process.env.PORT || 3001;
 import authRouter from "./modules/auth/auth.route.js";
 import userRouter from "./modules/user/user.route.js";
-import householdRouter from "./modules/household/household.route.js";
 import residentRouter from "./modules/resident/resident.route.js";
+import householdRouter from "./modules/household/household.route.js";
 //const route = require("./routes");
 // HTTP protocol
 app.use(morgan("combined"));
@@ -32,8 +32,8 @@ app.use(cors());
 
 app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
-app.use("/api/households", householdRouter);
 app.use("/api/residents", residentRouter);
+app.use("/api/households", householdRouter);
 
 app.listen(port, () => {
    console.log(`Example app listening on port ${port}`);

@@ -17,8 +17,12 @@ export const HttpStatus = {
 
 export const MIN_PASSWORD_CHARACTER = 6;
 export const UserRole = {
-   ADMIN: "R1",
-   PRESIDENT: "R2",
-   VICEPRESIDENT: "R3",
-   SECRETARY: "R4",
+   ADMIN: 1,
+   PRESIDENT: 2,
+   VICE_PRESIDENT: 3,
+   SECRETARY: "4",
+};
+export const Gender = {
+   MALE: "Nam",
+   FEMALE: "Nữ",
 };

@@ -1,43 +1,46 @@
 import Joi from "joi";
-
+const getList = {
+   query: Joi.object({
+      limit: Joi.number().integer().min(1).optional(),
+      offset: Joi.number().integer().min(1).optional(),
+      keyword: Joi.string().optional().allow(""),
+   }),
+};
 const getHouseholdByID = {
    params: Joi.object({
-      householdID: Joi.string().lowercase().required().trim(),
+      householdID: Joi.number().positive().required(),
    }),
 };
 const updateHouseholdByID = {
    params: Joi.object({
-      householdID: Joi.string().lowercase().required().trim(),
+      householdID: Joi.number().positive().required(),
    }),
    body: Joi.object({
-      householdCode: Joi.string().lowercase().required().trim(),
-      owner: Joi.string().lowercase().required().trim(),
-      addressHouse: Joi.string().lowercase().required().trim(),
-      precinct: Joi.string().lowercase().required().trim(),
-      district: Joi.string().lowercase().required().trim(),
-      city: Joi.string().lowercase().required().trim(),
+      maHoKhau: Joi.string().lowercase().required().trim(),
+      idChuHo: Joi.number().positive().required(),
+      maKhuVuc: Joi.string().lowercase().required().trim(),
+      diaChi: Joi.string().lowercase().required().trim(),
+      ngayChuyenDi: Joi.string().lowercase().trim().allow("").optional(),
+      lyDoChuyen: Joi.string().lowercase().trim().allow("").optional(),
    }),
 };
 const createHousehold = {
    body: Joi.object({
-      householdCode: Joi.string().lowercase().required().trim(),
-      owner: Joi.string().lowercase().required().trim(),
-      addressHouse: Joi.string().lowercase().required().trim(),
-      precinct: Joi.string().lowercase().required().trim(),
-      district: Joi.string().lowercase().required().trim(),
-      city: Joi.string().lowercase().required().trim(),
+      maHoKhau: Joi.string().lowercase().required().trim(),
+      idChuHo: Joi.number().positive().required(),
+      maKhuVuc: Joi.string().lowercase().required().trim(),
+      diaChi: Joi.string().lowercase().required().trim(),
    }),
 };
-const getHouseholdsByFilter = {
-   query: Joi.object().keys({
-      pageSize: Joi.number().integer().min(1).optional(),
-      pageNumber: Joi.number().integer().min(1).optional(),
-      keyword: Joi.string().optional().allow(""),
+const deleteById = {
+   params: Joi.object({
+      householdID: Joi.number().positive().required(),
    }),
 };
 export {
    getHouseholdByID,
    updateHouseholdByID,
    createHousehold,
-   getHouseholdsByFilter,
+   getList,
+   deleteById,
 };

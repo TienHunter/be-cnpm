@@ -5,18 +5,13 @@ import * as householdValidator from "./household.validator.js";
 import * as householdController from "./household.controller.js";
 import { verifyToken, checkUserRole } from "../../middlewares/authJwt.js";
 const router = Router();
-router.post(
-   "/:householdID/update",
-   [verifyToken, checkUserRole([UserRole.PRESIDENT, UserRole.VICEPRESIDENT])],
+router.put(
+   "/:householdID",
+   [verifyToken, checkUserRole([UserRole.PRESIDENT, UserRole.VICE_PRESIDENT])],
    validate(householdValidator.updateHouseholdByID),
    householdController.updateHouseholdByID
 );
-router.get(
-   "/filter",
-   [verifyToken],
-   validate(householdValidator.getHouseholdsByFilter),
-   householdController.getHouseholdsByFilter
-);
+
 router.get(
    "/:householdID",
    verifyToken,
@@ -24,17 +19,22 @@ router.get(
    householdController.getHouseholdByID
 );
 router.post(
-   "/create",
-   [verifyToken, checkUserRole([UserRole.PRESIDENT, UserRole.VICEPRESIDENT])],
+   "/",
+   [verifyToken, checkUserRole([UserRole.PRESIDENT, UserRole.VICE_PRESIDENT])],
    validate(householdValidator.createHousehold),
    householdController.createHousehold
 );
 router.delete(
    "/:householdID",
-   verifyToken,
-   validate(householdValidator.getHouseholdByID),
+   [verifyToken, checkUserRole([UserRole.PRESIDENT, UserRole.VICE_PRESIDENT])],
+   validate(householdValidator.deleteById),
    householdController.deleteHouseholdByID
 );
 
-router.get("/", [verifyToken], householdController.getAllHouseholds);
+router.get(
+   "/",
+   [verifyToken],
+   validate(householdValidator.getList),
+   householdController.getList
+);
 export default router;

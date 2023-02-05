@@ -1,9 +1,9 @@
 import db from "../../../models/index.cjs";
-let getAccountByUsername = async (username) => {
+let getUserByUsername = async (username) => {
    try {
-      return await db.Account.findOne({
+      return await db.User.findOne({
          where: {
-            usename: username,
+            username: username,
          },
          raw: true,
       });
@@ -11,4 +11,4 @@ let getAccountByUsername = async (username) => {
       throw error;
    }
 };
-export { getAccountByUsername };
+export { getUserByUsername };

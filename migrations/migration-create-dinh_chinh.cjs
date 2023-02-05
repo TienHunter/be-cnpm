@@ -1,39 +1,28 @@
 "use strict";
 module.exports = {
    async up(queryInterface, Sequelize) {
-      await queryInterface.createTable("Households", {
+      await queryInterface.createTable("Correction", {
          id: {
             allowNull: false,
             autoIncrement: true,
             primaryKey: true,
             type: Sequelize.INTEGER,
          },
-         householdCode: {
-            allowNull: false,
-            unique: true,
+         idHoKhau: {
+            type: Sequelize.INTEGER,
+         },
+         thongTinThayDoi: {
             type: Sequelize.STRING,
          },
-         owner: {
-            allowNull: false,
+         thayDoiTu: {
             type: Sequelize.STRING,
          },
-         addressHouse: {
-            allowNull: false,
+         thayDoiThanh: {
             type: Sequelize.STRING,
          },
-         precinct: {
-            allowNull: false,
-            type: Sequelize.STRING,
+         nguoiThayDoi: {
+            type: Sequelize.INTEGER,
          },
-         district: {
-            allowNull: false,
-            type: Sequelize.STRING,
-         },
-         city: {
-            allowNull: false,
-            type: Sequelize.STRING,
-         },
-
          createdAt: {
             allowNull: false,
             type: Sequelize.DATE,
@@ -43,12 +32,11 @@ module.exports = {
             type: Sequelize.DATE,
          },
          deletedAt: {
-            allowNull: true,
             type: Sequelize.DATE,
          },
       });
    },
    async down(queryInterface, Sequelize) {
-      await queryInterface.dropTable("Households");
+      await queryInterface.dropTable("Correction");
    },
 };
