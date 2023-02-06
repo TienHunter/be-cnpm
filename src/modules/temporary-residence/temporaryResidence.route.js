@@ -18,5 +18,10 @@ router.get(
    ],
    temporaryResidenceController.getTemporaryResidenceList
 );
-
+router.post(
+   "/",
+   [verifyToken, checkUserRole(UserRole.PRESIDENT, UserRole.VICE_PRESIDENT)],
+   validate(temporaryResidenceValidator.createTemporaryResidence),
+   temporaryResidenceController.createTemporaryResidence
+);
 export default router;

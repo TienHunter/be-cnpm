@@ -1,10 +1,14 @@
 import Joi from "joi";
 import { MIN_PASSWORD_CHARACTER } from "../../constant.js";
 
-const login = {
+const createTemporaryResidence = {
    body: Joi.object({
-      username: Joi.string().lowercase().required().trim(),
-      password: Joi.string().min(MIN_PASSWORD_CHARACTER).required(),
+      idNhanKhau: Joi.number().positive().required(),
+      maGiayTamtru: Joi.string().trim().allow("").optional(),
+      soDienThoaiNguoiDangKy: Joi.string().trim().allow("").optional(),
+      tuNgay: Joi.string().trim().allow("").optional(),
+      denNgay: Joi.string().trim().allow("").optional(),
+      lyDo: Joi.string().trim().allow("").optional(),
    }),
 };
-export { login };
+export { createTemporaryResidence };

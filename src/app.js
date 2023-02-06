@@ -9,6 +9,7 @@ import authRouter from "./modules/auth/auth.route.js";
 import userRouter from "./modules/user/user.route.js";
 import residentRouter from "./modules/resident/resident.route.js";
 import householdRouter from "./modules/household/household.route.js";
+import temporaryResidenceRouter from "./modules/temporary-residence/temporaryResidence.route.js";
 //const route = require("./routes");
 // HTTP protocol
 app.use(morgan("combined"));
@@ -34,7 +35,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/users", userRouter);
 app.use("/api/residents", residentRouter);
 app.use("/api/households", householdRouter);
-
+app.use("/api/temporary-residence", temporaryResidenceRouter);
 app.listen(port, () => {
    console.log(`Example app listening on port ${port}`);
 });
